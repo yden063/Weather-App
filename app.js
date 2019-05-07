@@ -1,7 +1,5 @@
 let local = {
-  'kelvin': '',
-  'celsius': '',
-  'farenheit': ''
+  'kelvin': ''
 }
 
 let temperatureDegree = document.querySelector('.temperature-degree');
@@ -66,18 +64,19 @@ function setHTMLElements(data) {
   const city = data.name;
   const kelvinTemperature = data.main.temp;
   const { description, icon } = data.weather[0];
+  
+  // Modify the JSON array
+  local.kelvin = kelvinTemperature;
+  console.log("kelvin : " + local.kelvin);
 
   locationTimezone.textContent = city;
-  temperatureDegree.textContent = kelvinToFarenheit(kelvinTemperature);
+  temperatureDegree.textContent = Math.round(kelvinToFarenheit(local.kelvin));
   temperatureDescription.textContent = description;
 
   let urlToIcon = `http://openweathermap.org/img/w/${icon}.png`;
   temperatureIcon.setAttribute("src", urlToIcon);
   temperatureIcon.setAttribute("alt", description);
   console.log(temperatureIcon);
-
-  // Modify the JSON array
-  local.kelvin = kelvinTemperature;
 }
 
 function kelvinToCelsius(kelvinTemperature) {
@@ -91,7 +90,7 @@ function kelvinToFarenheit(kelvinTemperature) {
 function setTemperature() {
   let newTemperature;
 
-  if (formula.textContent === "F") {
+  if (formula.textContent == "F") {
     // Convert to Celsius
     newTemperature = kelvinToCelsius(local.kelvin);
     formula.textContent = "C";
@@ -101,6 +100,6 @@ function setTemperature() {
     formula.textContent = "F";
   }
 
-  temperatureDegree.textContent = newTemperature;
+  temperatureDegree.textContent = Math.round(newTemperature);
 }
 
