@@ -73,7 +73,7 @@ function setHTMLElements(data) {
   temperatureDegree.textContent = Math.round(kelvinToFarenheit(local.kelvin));
   temperatureDescription.textContent = description;
 
-  let urlToIcon = `http://openweathermap.org/img/w/${icon}.png`;
+  const urlToIcon = `https://openweathermap.org/img/w/${icon}.png`;
   temperatureIcon.setAttribute("src", urlToIcon);
   temperatureIcon.setAttribute("alt", description);
   console.log(temperatureIcon);
